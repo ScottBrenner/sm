@@ -1,12 +1,28 @@
-# Try Out Development Containers: Go
+# sm-cli
 
-[![Open in Dev Containers](https://img.shields.io/static/v1?label=Dev%20Containers&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/microsoft/vscode-remote-try-go)
+A command-line interface for interacting with StepMania simfile packs - download new packs and updating existing ones right from your terminal.
 
-A **development container** is a running container with a well-defined tool/runtime stack and its prerequisites. You can try out development containers with **[GitHub Codespaces](https://github.com/features/codespaces)** or **[Visual Studio Code Dev Containers](https://aka.ms/vscode-remote/containers)**.
+## Usage
+`sm-cli` creates and interacts with an additional file within a pack's directory, `source.txt`. This file merely contains the source where the pack can be downloaded from.
 
-This is a sample project that lets you try out either option in a few easy steps. We have a variety of other [vscode-remote-try-*](https://github.com/search?q=org%3Amicrosoft+vscode-remote-try-&type=Repositories) sample projects, too.
+First, I navigate to a pack's directory and initialize `sm-cli` with the `init` argument:
+```
+$ cd Games/ITGmania/Songs/
+$ mkdir 7guys1pack
+$ cd 7guys1pack
+$ sm init
+Enter download source for pack: https://zenius-i-vanisher.com/v5.2/download.php?type=ddrpack&categoryid=127
+```
+Please be aware that the source URL here is the direct download location, and not the simfile overview page.
 
-> **Note:** If you already have a Codespace or dev container, you can jump to the [Things to try](#things-to-try) section.
+Once initialized I can download the pack with the `download` argument, be patient as this may take some time:
+```
+$ sm download
+Downloading pack...
+Unpacking pack...
+```
+
+`sm-cli` downloads the pack, extracts it, and deletes the downloaded archive. Already-downloaded packs can be updated with the same method.
 
 ## Setting up the development container
 
@@ -101,19 +117,9 @@ Some things to try:
 
 ## Contributing
 
-This project welcomes contributions and suggestions. Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.microsoft.com.
-
-When you submit a pull request, a CLA-bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+This project welcomes contributions and suggestions.
 
 ## License
 
-Copyright © Microsoft Corporation All rights reserved.<br />
+Copyright © Scott Brenner All rights reserved.<br />
 Licensed under the MIT License. See LICENSE in the project root for license information.
