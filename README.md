@@ -3,7 +3,8 @@
 A command-line interface for interacting with StepMania simfile packs - download new packs and update existing ones right from your terminal!
 
 ## Installation
-`sm` is available as a downloadable binary from the [releases page](https://github.com/ScottBrenner/sm/releases).
+
+See [INSTALLATION.md](INSTALLATION.md)
 
 ## Usage
 `sm` creates and interacts with an additional file within a pack's directory, `source.txt`. This file merely contains the source where the pack can be downloaded from.
