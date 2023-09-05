@@ -11,7 +11,7 @@ func Test_openSourceFile(t *testing.T) {
 		wantSourceURL string
 		wantErr       bool
 	}{
-		// TODO: Add test cases.
+		{"No such file", "", true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -36,7 +36,8 @@ func Test_downloadFromURL(t *testing.T) {
 		args    args
 		wantErr bool
 	}{
-		// TODO: Add test cases.
+		{"Valid", args{sourceURL: "https://zenius-i-vanisher.com/v5.2/download.php?type=ddrpack&categoryid=127"}, false},
+		{"Invalid", args{sourceURL: "https://zenius-i-vanisher.com/v5.2/invalid"}, true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -52,7 +53,7 @@ func Test_unzipDownloadedPack(t *testing.T) {
 		name    string
 		wantErr bool
 	}{
-		// TODO: Add test cases.
+		{"No such file", true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -68,7 +69,7 @@ func Test_removeZip(t *testing.T) {
 		name    string
 		wantErr bool
 	}{
-		// TODO: Add test cases.
+		{"No such file", true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -84,7 +85,7 @@ func Test_downloadPack(t *testing.T) {
 		name    string
 		wantErr bool
 	}{
-		// TODO: Add test cases.
+		{"No such file", true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
