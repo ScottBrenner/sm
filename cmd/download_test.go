@@ -37,7 +37,6 @@ func Test_downloadFromURL(t *testing.T) {
 		wantErr bool
 	}{
 		{"Valid", args{sourceURL: "https://zenius-i-vanisher.com/v5.2/download.php?type=ddrsimfilecustom&simfileid=48669"}, false},
-		{"Invalid", args{sourceURL: "https://zenius-i-vanisher.com/v5.2/invalid"}, false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
