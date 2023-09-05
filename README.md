@@ -1,14 +1,14 @@
-# sm-cli
+# sm
 
 A command-line interface for interacting with StepMania simfile packs - download new packs and update existing ones right from your terminal!
 
 ## Installation
-`sm-cli` is available as a downloadable binary from the [releases page](https://github.com/ScottBrenner/sm-cli/releases).
+`sm` is available as a downloadable binary from the [releases page](https://github.com/ScottBrenner/sm/releases).
 
 ## Usage
-`sm-cli` creates and interacts with an additional file within a pack's directory, `source.txt`. This file merely contains the source where the pack can be downloaded from.
+`sm` creates and interacts with an additional file within a pack's directory, `source.txt`. This file merely contains the source where the pack can be downloaded from.
 
-First, navigate to a pack's directory and initialize `sm-cli` with the `init` argument:
+First, navigate to a pack's directory and initialize `sm` with the `init` argument:
 ```
 $ cd Games/ITGmania/Songs/
 $ mkdir 7guys1pack
@@ -27,7 +27,7 @@ Downloading pack...
 Unpacking pack...
 ```
 
-`sm-cli` downloads the pack, extracts it, and deletes the downloaded archive. Already-downloaded packs can be updated with the same method.
+`sm` downloads the pack, extracts it, and deletes the downloaded archive. Already-downloaded packs can be updated with the same method.
 
 ## Development
 

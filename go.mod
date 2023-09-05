@@ -1,4 +1,4 @@
-module github.com/ScottBrenner/sm-cli
+module github.com/ScottBrenner/sm
 
 go 1.20
 

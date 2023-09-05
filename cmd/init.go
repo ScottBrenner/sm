@@ -13,18 +13,14 @@ import (
 // initCmd represents the init command
 var initCmd = &cobra.Command{
 	Use:   "init",
-	Short: "Initialize sm-cli functionality",
-	Long: `Initialize sm-cli functionality in a pack's directory.
+	Short: "Initialize sm functionality",
+	Long: `Initialize sm functionality in a pack's directory.
 
 Prompts for pack's download source and stores it in a text file
 to be referenced for future operations.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		initPackSource()
 	},
-}
-
-func init() {
-	rootCmd.AddCommand(initCmd)
 }
 
 func init() {

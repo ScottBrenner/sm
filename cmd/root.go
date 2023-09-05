@@ -11,7 +11,7 @@ import (
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "sm-cli",
+	Use:   "sm",
 	Short: "Download & update StepMania simfile packs",
 	Long:  "A command-line interface for downloading and updating StepMania simfile packs",
 }
@@ -23,8 +23,4 @@ func Execute() {
 	if err != nil {
 		os.Exit(1)
 	}
-}
-
-func init() {
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
