@@ -36,7 +36,7 @@ func Test_downloadFromURL(t *testing.T) {
 		args    args
 		wantErr bool
 	}{
-		{"Valid", args{sourceURL: "https://zenius-i-vanisher.com/v5.2/download.php?type=ddrpack&categoryid=127"}, false},
+		{"Valid", args{sourceURL: "https://zenius-i-vanisher.com/v5.2/download.php?type=ddrsimfilecustom&simfileid=48669"}, false},
 		{"Invalid", args{sourceURL: "https://zenius-i-vanisher.com/v5.2/invalid"}, true},
 	}
 	for _, tt := range tests {
