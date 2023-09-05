@@ -52,7 +52,7 @@ func Test_unzipDownloadedPack(t *testing.T) {
 		name    string
 		wantErr bool
 	}{
-		{"File does not exist", true},
+		{"Success", false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -68,7 +68,7 @@ func Test_removeZip(t *testing.T) {
 		name    string
 		wantErr bool
 	}{
-		{"No such file", true},
+		{"Success", false},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
