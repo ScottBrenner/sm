@@ -19,23 +19,27 @@ Using `/usr/local/bin`:
 
     # Switch directory
     cd /usr/local/bin
-    # extract the tarball
-    tar xopf <Path to downloaded binary>
+    # download the binary
+    wget -O sm <URL to binary download>
+    # set permissions
+    chmod +x sm
     # verify installation
     sm help
 
-Using $HOME/bin:
+Using `$HOME/bin`:
 
     # create the directory if needed
     mkdir -p $HOME/bin
     # make it the working directory
     cd $HOME/bin
-    # extract the tarball
-    tar xopf <Path to downloaded binary>
+    # download the binary
+    wget -O sm <URL to binary download>
+    # set permissions
+    chmod +x sm
     # verify installation
     ./sm help
 
-To run `sm`` without the `./``, you will need to add `$HOME/bin`` to your `$PATH``. Here is how you do that:
+To run `sm` without the `./`, you will need to add `$HOME/bin` to your `$PATH`. Here is how you do that:
 
 1. Determine your default shell (zsh or bash).
 
