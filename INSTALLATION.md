@@ -26,7 +26,7 @@ Using `/usr/local/bin`:
     # verify installation
     sm help
 
-Using $HOME/bin:
+Using `$HOME/bin`:
 
     # create the directory if needed
     mkdir -p $HOME/bin
