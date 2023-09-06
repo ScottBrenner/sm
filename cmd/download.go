@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/spf13/cobra"
 )
@@ -75,35 +76,37 @@ func unzipDownloadedPack() (err error) {
 	}
 	defer archive.Close()
 	for _, f := range archive.File {
-		filePath := filepath.Join(dst, f.Name)
-		fmt.Println("unzipping file ", filePath)
+		if !strings.Contains(f.Name, "..") {
+			filePath := filepath.Join(dst, f.Name)
+			fmt.Println("unzipping file ", filePath)
 
-		if f.FileInfo().IsDir() {
-			fmt.Println("creating song folder...")
-			os.MkdirAll(filePath, os.ModePerm)
-			continue
+			if f.FileInfo().IsDir() {
+				fmt.Println("creating song folder...")
+				os.MkdirAll(filePath, os.ModePerm)
+				continue
+			}
+
+			if err := os.MkdirAll(filepath.Dir(filePath), os.ModePerm); err != nil {
+				panic(err)
+			}
+
+			dstFile, err := os.OpenFile(filePath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, f.Mode())
+			if err != nil {
+				panic(err)
+			}
+
+			fileInArchive, err := f.Open()
+			if err != nil {
+				panic(err)
+			}
+
+			if _, err := io.Copy(dstFile, fileInArchive); err != nil {
+				panic(err)
+			}
+
+			dstFile.Close()
+			fileInArchive.Close()
 		}
-
-		if err := os.MkdirAll(filepath.Dir(filePath), os.ModePerm); err != nil {
-			panic(err)
-		}
-
-		dstFile, err := os.OpenFile(filePath, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, f.Mode())
-		if err != nil {
-			panic(err)
-		}
-
-		fileInArchive, err := f.Open()
-		if err != nil {
-			panic(err)
-		}
-
-		if _, err := io.Copy(dstFile, fileInArchive); err != nil {
-			panic(err)
-		}
-
-		dstFile.Close()
-		fileInArchive.Close()
 	}
 	return nil
 }
