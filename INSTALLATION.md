@@ -8,6 +8,17 @@
     Windows
     Linux
 
+## Installing Binary on Windows
+
+Rename the downloaded binary and append the `.exe` extension, execute using the full path:
+
+```
+C:\Users\scott>cd Downloads
+C:\Users\scott\Downloads>rename sm-windows-amd64 sm.exe
+C:\Users\scott\Downloads>cd C:\Users\scott\Games\ITGmania\Songs
+>C:\Users\scott\Downloads\sm.exe help
+```
+
 ## Installing Binary on macOS / Linux
 
 Once downloaded, there are two common ways to install. You can place the binary in either of the following directories:
