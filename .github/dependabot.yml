@@ -9,3 +9,10 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: "github-actions"
+    # Look for GitHub Actions workflows in the `root` directory
+    directory: "/"
+    # Check the for updates once a week
+    schedule:
+      interval: "weekly"
