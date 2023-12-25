@@ -3,7 +3,10 @@ Copyright © 2023 Scott Brenner <scott@scottbrenner.me>
 */
 package cmd
 
-import "testing"
+import (
+	"os"
+	"testing"
+)
 
 func Test_openSourceFile(t *testing.T) {
 	tests := []struct {
@@ -11,7 +14,12 @@ func Test_openSourceFile(t *testing.T) {
 		wantSourceURL string
 		wantErr       bool
 	}{
-		{"No such file", "", true},
+		{"Success", "https://zenius-i-vanisher.com/v5.2/download.php?type=ddrsimfile&simfileid=8081", false},
+		{"Failure", "", true},
+	}
+	err := os.WriteFile("source.txt", []byte("https://zenius-i-vanisher.com/v5.2/download.php?type=ddrsimfile&simfileid=8081"), 0644) // Create a test file
+	if err != nil {
+		t.Fatal(err)
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -23,6 +31,7 @@ func Test_openSourceFile(t *testing.T) {
 			if gotSourceURL != tt.wantSourceURL {
 				t.Errorf("openSourceFile() = %v, want %v", gotSourceURL, tt.wantSourceURL)
 			}
+			os.Remove("source.txt")
 		})
 	}
 }
@@ -36,7 +45,8 @@ func Test_downloadFromURL(t *testing.T) {
 		args    args
 		wantErr bool
 	}{
-		{"Valid", args{sourceURL: "https://zenius-i-vanisher.com/v5.2/download.php?type=ddrsimfilecustom&simfileid=48669"}, false},
+		{"Valid", args{sourceURL: "https://zenius-i-vanisher.com/v5.2/download.php?type=ddrsimfile&simfileid=8081"}, false},
+		// {"Invalid", args{sourceURL: "https://zeninisher.com/invalid.zip"}, true},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -68,7 +78,12 @@ func Test_removeZip(t *testing.T) {
 		name    string
 		wantErr bool
 	}{
-		{"Success", false},
+		{"Delete after creation", false},
+		{"Fail to delete", true},
+	}
+	err := os.WriteFile("pack.zip", []byte{}, 0644) // Create a test file
+	if err != nil {
+		t.Fatal(err)
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -84,7 +99,12 @@ func Test_downloadPack(t *testing.T) {
 		name    string
 		wantErr bool
 	}{
+		{"Success", false},
 		{"No such file", true},
+	}
+	err := os.WriteFile("source.txt", []byte("https://zenius-i-vanisher.com/v5.2/download.php?type=ddrsimfile&simfileid=8081"), 0644) // Create a test file
+	if err != nil {
+		t.Fatal(err)
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -92,5 +112,6 @@ func Test_downloadPack(t *testing.T) {
 				t.Errorf("downloadPack() error = %v, wantErr %v", err, tt.wantErr)
 			}
 		})
+		os.Remove("source.txt")
 	}
 }
