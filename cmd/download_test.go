@@ -3,7 +3,11 @@ Copyright © 2023 Scott Brenner <scott@scottbrenner.me>
 */
 package cmd
 
-import "testing"
+import (
+	"io/ioutil"
+	"os"
+	"testing"
+)
 
 func Test_openSourceFile(t *testing.T) {
 	tests := []struct {
@@ -11,7 +15,12 @@ func Test_openSourceFile(t *testing.T) {
 		wantSourceURL string
 		wantErr       bool
 	}{
-		{"No such file", "", true},
+		{"Success", "", false},
+		{"Failure", "", true},
+	}
+	err := ioutil.WriteFile("source.txt", []byte{}, 0644) // Create a test file
+	if err != nil {
+		t.Fatal(err)
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -23,6 +32,7 @@ func Test_openSourceFile(t *testing.T) {
 			if gotSourceURL != tt.wantSourceURL {
 				t.Errorf("openSourceFile() = %v, want %v", gotSourceURL, tt.wantSourceURL)
 			}
+			os.Remove("source.txt")
 		})
 	}
 }
@@ -68,7 +78,12 @@ func Test_removeZip(t *testing.T) {
 		name    string
 		wantErr bool
 	}{
-		{"Success", false},
+		{"Delete after creation", false},
+		{"Fail to delete", true},
+	}
+	err := ioutil.WriteFile("pack.zip", []byte{}, 0644) // Create a test file
+	if err != nil {
+		t.Fatal(err)
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
