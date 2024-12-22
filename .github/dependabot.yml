@@ -16,3 +16,7 @@ updates:
     # Check the for updates once a week
     schedule:
       interval: "weekly"
+  - package-ecosystem: "devcontainers"
+    directory: "/"
+    schedule:
+      interval: weekly
