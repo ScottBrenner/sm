@@ -204,6 +204,10 @@ func unzipArchive(zipPath, dstDir string, out io.Writer) error {
 }
 
 func extractZipEntry(dstDir string, f *zip.File, out io.Writer) error {
+	if strings.Contains(f.Name, "..") {
+		return fmt.Errorf("illegal file path in archive: %s", f.Name)
+	}
+
 	targetPath := filepath.Join(dstDir, f.Name)
 	rel, err := filepath.Rel(dstDir, targetPath)
 	if err != nil || rel == ".." || strings.HasPrefix(rel, ".."+string(filepath.Separator)) {
