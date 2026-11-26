@@ -1,0 +1,54 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  release:
+    types: [created]
+
+permissions: {}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+      attestations: write
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - linux
+          - windows
+          - darwin
+        arch:
+          - amd64
+          - arm64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up Go
+        uses: actions/setup-go@v7.1.0
+        with:
+          go-version-file: go.mod
+
+      - name: Build binary
+        env:
+          CGO_ENABLED: 0
+          GOOS: ${{ matrix.os }}
+          GOARCH: ${{ matrix.arch }}
+        run: go build -trimpath -tags=netgo -o "sm-${{ matrix.os }}-${{ matrix.arch }}" .
+
+      - name: Attest build provenance
+        uses: actions/attest-build-provenance@v4.2.2
+        with:
+          subject-path: "sm-${{ matrix.os }}-${{ matrix.arch }}"
+
+      - name: Upload release asset
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ github.event.release.tag_name }}" "sm-${{ matrix.os }}-${{ matrix.arch }}" --clobber
