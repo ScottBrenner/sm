@@ -1,5 +1,5 @@
 /*
-Copyright © 2023 Scott Brenner <scott@scottbrenner.me>
+Copyright © 2026 Scott Brenner <scott@scottbrenner.me>
 */
 package main
 
